@@ -9,8 +9,8 @@ package aedmztest
 import (
 	"bytes"
 	"code.google.com/p/leveldb-go/leveldb/memdb"
-	"github.com/maruel/swarming-go/pkg/aedmz"
-	"github.com/maruel/swarming-go/pkg/ofh"
+	"github.com/maruel/aedmz"
+	"github.com/maruel/ofh"
 	"net/http"
 	"time"
 )

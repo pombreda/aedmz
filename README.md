@@ -1,10 +1,19 @@
-Swarming (Go)
-=============
+AppEngine DeMilitarized Zone
+============================
 
-This directory contains the services needed to run a Golang Isolate Server.
+Package aedmz is an AppEngine abstraction layer to run a service either locally
+or on AppEngine.
 
-- isolateserver/ contains the code for the Isolate Server.
-- pkg/ contains the generic packages.
-- tools/ contains utilities to help run, test and deploy the server.
+This package contains code and interfaces to make it possible for a server to
+run on either AppEngine or as a local process. This permits not being locked in
+on AppEngine for a service coded using exclusively this package instead of using
+the "appengine" package directly.
 
-This code is only tested on Ubuntu.
+
+Testing package
+---------------
+
+Package aedmz/aedmztest is an AppEngine abstraction layer for unit testing.
+
+Coupled with the package aedmz, it enables unit testing that properly simulate
+either a running (local or AppEngine) environment.

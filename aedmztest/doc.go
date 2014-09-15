@@ -5,5 +5,5 @@
 // Package aedmztest is an AppEngine abstraction layer for unit testing.
 //
 // Coupled with the package aedmz, it enables unit testing that properly
-// simulate a running (local or AppEngine) environment.
+// simulate either a running (local or AppEngine) environment.
 package aedmztest

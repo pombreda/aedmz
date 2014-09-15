@@ -9,7 +9,7 @@ package aedmztest
 import (
 	"appengine"
 	"appengine/aetest"
-	"github.com/maruel/swarming-go/pkg/aedmz"
+	"github.com/maruel/aedmz"
 	"io"
 	"net/http"
 )

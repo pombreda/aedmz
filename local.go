@@ -15,7 +15,7 @@ import (
 	"errors"
 	"fmt"
 	gorillaContext "github.com/gorilla/context"
-	"github.com/maruel/swarming-go/pkg/ofh"
+	"github.com/maruel/ofh"
 	"io"
 	"net/http"
 	"reflect"
