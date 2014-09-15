@@ -141,12 +141,12 @@ func (a *appContext) InjectContext(handler http.HandlerFunc) http.HandlerFunc {
 				// .Write() was already called unless the full reply is buffered in
 				// memory. An option?
 				w2.WriteHeader(503)
-				w2.Write([]byte("Panicked"))
+				_, _ = w2.Write([]byte("Panicked"))
 			}
 			c.record.Status = int32(w2.Status)
 			c.record.ResponseSize = w2.Len
 			c.record.EndTime = time.Now().UTC()
-			io.WriteString(c.app.out, c.record.String())
+			_, _ = io.WriteString(c.app.out, c.record.String())
 
 			c.app.logService.Append(c.record)
 		}()
@@ -585,7 +585,7 @@ func (r *requestContext) TaskEnqueue(url, taskName string, payload []byte) error
 		for i := 0; i < 5; i++ {
 			resp, err := http.Post(url, "application/octet-stream", bytes.NewReader(payload))
 			if err == nil {
-				resp.Body.Close()
+				_ = resp.Body.Close()
 				if resp.StatusCode == 200 {
 					return
 				}

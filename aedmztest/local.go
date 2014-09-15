@@ -15,11 +15,18 @@ import (
 	"time"
 )
 
+// AppContextImplMock implements fake specific properties. It can be passed to
+// NewAppMock to create an aedmz.AppContext.
 type AppContextImplMock struct {
 	Timestamp time.Time
 }
 
+// Now simulates an hardcoded time constant. If AppContextImplMock.Timestamp is
+// not set, the current time in UTC is returned.
 func (a AppContextImplMock) Now() time.Time {
+	if a.Timestamp.IsZero() {
+		return time.Now().UTC()
+	}
 	return a.Timestamp
 }
 

@@ -14,8 +14,14 @@ import (
 	"net/http"
 )
 
+// AppContextImplMock implements fake specific properties. It can be passed to
+// NewAppMock to create an aedmz.AppContext.
 type AppContextImplMock struct{}
 
+// NewContext is called through aedmz.AppContext on each new HTTP request.
+//
+// It creates all the fake necessary to simulate an HTTP context for logging,
+// DB queries, user context, etc.
 func (a AppContextImplMock) NewContext(r *http.Request) appengine.Context {
 	// https://developers.google.com/appengine/docs/go/tools/localunittesting
 	//
