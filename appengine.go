@@ -30,7 +30,7 @@ import (
 	"time"
 )
 
-// Interface that describes the necessary mocks to load a unit test AppContext.
+// AppContextImpl describes the necessary mocks to load a unit test AppContext.
 //
 // This exposes internal details. It is meant for use for testing only by
 // aedmztest.NewAppMock()
@@ -178,11 +178,11 @@ func (r *requestContext) getAccessToken(scope string) (*oauth.Token, error) {
 	return &oauth.Token{AccessToken: a, Expiry: e}, nil
 }
 
-func (r *requestContext) HttpClient() (*http.Client, error) {
+func (r *requestContext) HTTPClient() (*http.Client, error) {
 	return &http.Client{Transport: r.getTransport()}, nil
 }
 
-func (r *requestContext) OAuth2HttpClient(scope string) (*http.Client, error) {
+func (r *requestContext) OAuth2HTTPClient(scope string) (*http.Client, error) {
 	token, err := r.getAccessToken(scope)
 	if err != nil {
 		return nil, err
@@ -230,12 +230,12 @@ func KeyFromAppengineKey(key *datastore.Key) *Key {
 
 func assertIsSlice(objects interface{}, expectedLen int) (*reflect.Value, error) {
 	if reflect.TypeOf(objects).Kind() != reflect.Slice {
-		return nil, errors.New("Failed to cast to []interface{}")
+		return nil, errors.New("failed to cast to []interface{}")
 	}
 	value := reflect.ValueOf(objects)
 	objectsLen := value.Len()
 	if objectsLen != expectedLen {
-		return nil, fmt.Errorf("Length mismatch: len(keys) %d != len(objects) %s", expectedLen, objectsLen)
+		return nil, fmt.Errorf("length mismatch: len(keys) %d != len(objects) %s", expectedLen, objectsLen)
 	}
 	return &value, nil
 }
@@ -487,7 +487,14 @@ func (r *requestContext) CacheSet(key *Key, object interface{}, expiration time.
 
 // LogService.
 
+// AppLog is an entry in the Logger service.
+//
+// It is compatible with local.go's AppLog.
 type AppLog log.AppLog
+
+// Record is an entry for a single HTTP request.
+//
+// It is compatible with local.go's Record.
 type Record log.Record
 
 func (r *requestContext) run(q *log.Query, entries chan<- *Record) {

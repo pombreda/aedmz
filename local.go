@@ -28,7 +28,7 @@ import (
 	"unicode"
 )
 
-// Interface that describes the necessary mocks to load a unit test AppContext.
+// AppContextImpl describes the necessary mocks to load a unit test AppContext.
 //
 // This exposes internal details. It is meant for use for testing only by
 // aedmztest.NewAppMock()
@@ -208,11 +208,11 @@ func (r *requestContext) getTransport() http.RoundTripper {
 	return r.r
 }
 
-func (r *requestContext) HttpClient() (*http.Client, error) {
+func (r *requestContext) HTTPClient() (*http.Client, error) {
 	return &http.Client{Transport: r.getTransport()}, nil
 }
 
-func (r *requestContext) OAuth2HttpClient(scope string) (*http.Client, error) {
+func (r *requestContext) OAuth2HTTPClient(scope string) (*http.Client, error) {
 	return r.app.oauth2.GetClient(scope, r.getTransport())
 }
 
@@ -240,13 +240,13 @@ type dbContext struct {
 
 func (d *dbContext) GetMulti(keys []*Key, objects interface{}, results chan<- *OpResult) {
 	if reflect.TypeOf(objects).Kind() != reflect.Slice {
-		results <- &OpResult{Err: errors.New("Failed to cast to []interface{}")}
+		results <- &OpResult{Err: errors.New("failed to cast to []interface{}")}
 		return
 	}
 	value := reflect.ValueOf(objects)
 	objectsLen := value.Len()
 	if objectsLen != len(keys) {
-		results <- &OpResult{Err: fmt.Errorf("Length mismatch: len(keys) %d != len(objects) %s", len(keys), objectsLen)}
+		results <- &OpResult{Err: fmt.Errorf("length mismatch: len(keys) %d != len(objects) %s", len(keys), objectsLen)}
 		return
 	}
 	for i := range keys {
@@ -274,13 +274,13 @@ func (d *dbContext) GetMulti(keys []*Key, objects interface{}, results chan<- *O
 func (d *dbContext) PutMulti(keys []*Key, objects interface{}, results chan<- *OpResult) {
 	// TODO(maruel): Update secondary indexes.
 	if reflect.TypeOf(objects).Kind() != reflect.Slice {
-		results <- &OpResult{Err: errors.New("Failed to cast to []interface{}")}
+		results <- &OpResult{Err: errors.New("failed to cast to []interface{}")}
 		return
 	}
 	value := reflect.ValueOf(objects)
 	objectsLen := value.Len()
 	if objectsLen != len(keys) {
-		results <- &OpResult{Err: fmt.Errorf("Length mismatch: len(keys) %d != len(objects) %s", len(keys), objectsLen)}
+		results <- &OpResult{Err: fmt.Errorf("length mismatch: len(keys) %d != len(objects) %s", len(keys), objectsLen)}
 		return
 	}
 	for i := range keys {
@@ -490,7 +490,7 @@ func (l *logServiceContext) GetLogEntry(requestIDs []string, entries chan<- *Rec
 
 // Record is an entry for a single HTTP request.
 //
-// It is compatible with appegnine.log/Record.
+// It is compatible with appengine.log/Record.
 type Record struct {
 	AppID        string
 	VersionID    string

@@ -19,8 +19,8 @@ import (
 	"time"
 )
 
+// Same values as google_appengine/google/appengine/api/logservice/logservice.py
 const (
-	// Same values as google_appengine/google/appengine/api/logservice/logservice.py
 	LogLevelDebug = iota
 	LogLevelInfo
 	LogLevelWarning
@@ -29,7 +29,7 @@ const (
 )
 
 // ErrNotFound is returned when a object requested in DB or Cache is not found.
-var ErrNotFound = errors.New("Requested object not found")
+var ErrNotFound = errors.New("requested object not found")
 
 // An AppContext is the interface to generate new RequestContext upon each new
 // in-bound HTTP connections.
@@ -96,7 +96,7 @@ func NewKey(kind, stringID string, parent *Key) *Key {
 	return &Key{kind, stringID, 0, parent}
 }
 
-// Returned as a result in the future for a DB or Cache operation.
+// OpResult is returned as a result in the future for a DB or Cache operation.
 type OpResult struct {
 	Key    *Key
 	Index  int         // Applicable for *Multi functions.
@@ -193,7 +193,7 @@ func CacheGet(cache Cache, key *Key, timeout time.Duration) interface{} {
 	}
 }
 
-// Abstract contextual logging.
+// Logger abstracts contextual logging so that log entries are request-aware.
 type Logger interface {
 	Debugf(format string, args ...interface{})
 	Infof(format string, args ...interface{})
@@ -214,6 +214,7 @@ type LogService interface {
 	GetLogEntry(requestIDs []string, logs chan<- *Record)
 }
 
+// Tasker is the task queue management service.
 type Tasker interface {
 	TaskEnqueue(url, taskName string, payload []byte) error
 }
@@ -227,16 +228,16 @@ type AppIdentity interface {
 // Connectivity exposes both unauthenticated and authenticated out-bound HTTP
 // connections.
 type Connectivity interface {
-	// HttpClient returns an *http.Client for outgoing connections that are
+	// HTTPClient returns an *http.Client for outgoing connections that are
 	// bound to this incoming request. Note that the RoundTripper may enforce a
 	// limit on the data size.
-	HttpClient() (*http.Client, error)
-	// OAuth2HttpClient returns an *http.Client that can be used to send RPCs to a
+	HTTPClient() (*http.Client, error)
+	// OAuth2HTTPClient returns an *http.Client that can be used to send RPCs to a
 	// remote service like Google CloudStorage with the Application's identity.
-	OAuth2HttpClient(scope string) (*http.Client, error)
+	OAuth2HTTPClient(scope string) (*http.Client, error)
 }
 
-// Context for a single HTTP request.
+// RequestContext is the context for a single HTTP request.
 type RequestContext interface {
 	AppIdentity
 	Connectivity

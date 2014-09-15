@@ -29,13 +29,13 @@ func TestConnectivity(t *testing.T) {
 	c := app.NewContext(req)
 	defer CloseRequest(c)
 
-	r, err := c.HttpClient()
+	r, err := c.HTTPClient()
 	if r == nil {
 		t.Fatal("Expected transport")
 	}
 	ut.AssertEqual(t, nil, err)
 
-	o, err := c.OAuth2HttpClient("scope")
+	o, err := c.OAuth2HTTPClient("scope")
 	if o == nil {
 		t.Fatal("Expected transport")
 	}
