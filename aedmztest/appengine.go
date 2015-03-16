@@ -7,11 +7,13 @@
 package aedmztest
 
 import (
-	"appengine"
-	"appengine/aetest"
-	"github.com/maruel/aedmz"
 	"io"
 	"net/http"
+
+	"github.com/maruel/aedmz"
+
+	"appengine"
+	"appengine/aetest"
 )
 
 // AppContextImplMock implements fake specific properties. It can be passed to

@@ -10,12 +10,9 @@ package aedmz
 
 import (
 	"bytes"
-	leveldbdb "code.google.com/p/leveldb-go/leveldb/db"
 	"encoding/json"
 	"errors"
 	"fmt"
-	gorillaContext "github.com/gorilla/context"
-	"github.com/maruel/ofh"
 	"io"
 	"net/http"
 	"reflect"
@@ -26,6 +23,10 @@ import (
 	"sync/atomic"
 	"time"
 	"unicode"
+
+	leveldbdb "code.google.com/p/leveldb-go/leveldb/db"
+	gorillaContext "github.com/gorilla/context"
+	"github.com/maruel/ofh"
 )
 
 // AppContextImpl describes the necessary mocks to load a unit test AppContext.

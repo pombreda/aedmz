@@ -5,10 +5,11 @@
 package aedmz
 
 import (
-	"github.com/maruel/ut"
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/maruel/ut"
 )
 
 func TestAppIdentity(t *testing.T) {

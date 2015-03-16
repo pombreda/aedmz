@@ -8,13 +8,14 @@ package aedmz
 
 import (
 	"bytes"
-	"code.google.com/p/leveldb-go/leveldb/memdb"
-	"github.com/maruel/ofh"
-	"github.com/maruel/ut"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"code.google.com/p/leveldb-go/leveldb/memdb"
+	"github.com/maruel/ofh"
+	"github.com/maruel/ut"
 )
 
 type appContextImplMock struct {

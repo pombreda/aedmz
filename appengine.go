@@ -9,6 +9,17 @@ package aedmz
 // AppEngine abstraction layer.
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"reflect"
+	"strings"
+	"sync"
+	"time"
+
 	"appengine"
 	"appengine/datastore"
 	"appengine/log"
@@ -16,18 +27,9 @@ import (
 	"appengine/taskqueue"
 	"appengine/urlfetch"
 	"appengine/user"
-	"code.google.com/p/goauth2/oauth"
-	"crypto/sha256"
-	"encoding/hex"
-	"errors"
-	"fmt"
+
 	gorillaContext "github.com/gorilla/context"
-	"io"
-	"net/http"
-	"reflect"
-	"strings"
-	"sync"
-	"time"
+	"golang.org/x/oauth2"
 )
 
 // AppContextImpl describes the necessary mocks to load a unit test AppContext.

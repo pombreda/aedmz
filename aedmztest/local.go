@@ -8,11 +8,12 @@ package aedmztest
 
 import (
 	"bytes"
+	"net/http"
+	"time"
+
 	"code.google.com/p/leveldb-go/leveldb/memdb"
 	"github.com/maruel/aedmz"
 	"github.com/maruel/ofh"
-	"net/http"
-	"time"
 )
 
 // AppContextImplMock implements fake specific properties. It can be passed to

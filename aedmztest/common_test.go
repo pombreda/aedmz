@@ -5,9 +5,10 @@
 package aedmztest
 
 import (
-	"github.com/maruel/ut"
 	"net/http"
 	"testing"
+
+	"github.com/maruel/ut"
 )
 
 func TestFunctional(t *testing.T) {
